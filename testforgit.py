@@ -22,7 +22,4 @@ person2.display()
 person3 = Person("Chris", Height(6,2))
 person3.display()
 
-
-# I like making changes
-
-person5 = Person("Edgar", Height())
+# This is just a sample change
