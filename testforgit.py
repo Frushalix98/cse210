@@ -10,12 +10,7 @@ class Person:
         self.height.display()
 
 class Height:
-    def __init__(self):
-        self.feet = 7
-        self.inches = 11
-    def __init__(self,feet,inches=0):
-        self.feet = feet
-        self.inches = inches
+
     def display(self):
         print(f"{self.feet}'{self.inches}\"")
 person1 = Person("Greg", Height(2,11))
@@ -26,3 +21,8 @@ person2.display()
 
 person3 = Person("Chris", Height(6,2))
 person3.display()
+
+
+# I like making changes
+
+person5 = Person("Edgar", Height())
