@@ -20,7 +20,12 @@ class Height:
     def display(self):
         print(f"{self.feet}'{self.inches}\"")
 person1 = Person("Greg", Height(2,11))
-person2 = Person("Terry", Height(8))
+person4 = Person("John", Height(5))
+person2 = Person("Terry", Height(6))
 person1.display()
 person2.display()
 
+person3 = Person("Chris", Height(6,2))
+person3.display()
+
+# This is just a sample change
