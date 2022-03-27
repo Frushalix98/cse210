@@ -41,6 +41,7 @@ class Director:
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
+<<<<<<< HEAD:GreedTDM/game/directing/director.py
         artifacts = cast.get_actors("artifacts")
         #Stages the velocity to change
         robot.set_velocity(velocity)
@@ -48,9 +49,14 @@ class Director:
         for artifact in artifacts:
             artifact.set_velocity(velocity)        
         
+=======
+        robot.set_velocity(velocity)   
+         artifacts = cast.get_actors("artifacts")    
+>>>>>>> 394eb7f3415acbae2501d3c567a3b6c1cd7edfa1:rfk-complete/rfk/game/directing/director.py
 
     def _do_updates(self, cast):
-        """Updates the robot's position and resolves any collisions with artifacts.
+        """Updates the robot's position and re
+        solves any collisions with artifacts.
         
         Args:
             cast (Cast): The cast of actors.
