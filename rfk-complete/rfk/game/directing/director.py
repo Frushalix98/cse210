@@ -39,10 +39,12 @@ class Director:
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot.set_velocity(velocity)   
+         artifacts = cast.get_actors("artifacts")    
 
     def _do_updates(self, cast):
-        """Updates the robot's position and resolves any collisions with artifacts.
+        """Updates the robot's position and re
+        solves any collisions with artifacts.
         
         Args:
             cast (Cast): The cast of actors.
@@ -54,9 +56,12 @@ class Director:
         banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
+        # Where it changes locations based on velocity
         robot.move_next(max_x, max_y)
         
+        #Interacting with Each Artifact
         for artifact in artifacts:
+            artifact.move_next(max_x, max_y)
             if robot.get_position().equals(artifact.get_position()):
                 message = artifact.get_message()
                 banner.set_text(message)    
