@@ -1,3 +1,4 @@
+from game.shared.point import Point
 class Director:
     """A person who directs the game. 
     
@@ -24,6 +25,7 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
+        self.score = 0
         self._video_service.open_window()
         while self._video_service.is_window_open():
             self._get_inputs(cast)
@@ -39,7 +41,13 @@ class Director:
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        artifacts = cast.get_actors("artifacts")
+        #Stages the velocity to change
+        robot.set_velocity(velocity)
+        velocity = Point(0,15)
+        for artifact in artifacts:
+            artifact.set_velocity(velocity)        
+        
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -47,6 +55,7 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
+        
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
@@ -54,12 +63,20 @@ class Director:
         banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
+        # Where it changes locations based on velocity
         robot.move_next(max_x, max_y)
         
+        #Interacting with Each Artifact
         for artifact in artifacts:
+            artifact.move_next(max_x, max_y)
             if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
+                if artifact.get_text() == '*':
+                    self.score +=1
+                elif artifact.get_text() == 'O':
+                    self.score -=1
+                cast.remove_actor('artifacts', artifact)
+                # message = artifact.get_message()
+            banner.set_text("Score: " + str(self.score))    
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
