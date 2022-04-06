@@ -29,7 +29,7 @@ class KeyboardService:
         dx = 0
         dy = 0
 
-        DOWN = Point(0, y)
+        
 
         if pyray.is_key_down(pyray.KEY_LEFT):
             dx = -1

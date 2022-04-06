@@ -42,11 +42,7 @@ def main():
     
     # create the robot
     x = int(MAX_X / 2)
-<<<<<<< HEAD:GreedTDM/__main__.py
     y = MAX_Y - CELL_SIZE
-=======
-    y = MAX_Y - CELL_SIZE # Changed to bottom of screen
->>>>>>> 394eb7f3415acbae2501d3c567a3b6c1cd7edfa1:rfk-complete/rfk/__main__.py
     position = Point(x, y)
 
     robot = Actor()
