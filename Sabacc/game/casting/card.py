@@ -5,7 +5,7 @@ class Card():
         value (int): The number on a card.
     """
 
-    def __init__(self, value, suit = ""):
+    def __init__(self, value = 0):
             """Constructs a new instance of Card with a value attribute.
 
             Args:

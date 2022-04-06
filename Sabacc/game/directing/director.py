@@ -1,6 +1,8 @@
 from game.casting.player import Player
 from game.casting.card import Card
 from game.casting.die import Die
+from game.casting.deck import Deck
+import constants
 
 class Director:
     """A person who directs the game. 
@@ -18,7 +20,39 @@ class Director:
             self (Director): an instance of Director.
         """
         self.is_playing = True
+        
+        # ----------
+        #   SETUP
+        # ----------
 
+        # Dice
+        self.dice_list = []
+        for number in NUM_OF_DIE:
+            dice = Die()
+            self.dice_list.append(dice)
+
+        # Card Decks
+        self.deck_pile = Deck()
+        for value in DECK_SIZE_POSITIVE:
+            card = Card(value)
+            self.deck_pile.add(card)
+
+        # Players
+        self.player_list = []
+        for player in NUM_OF_PLAYERS:
+            player = Player()
+            self.player_list.append(player)
+
+    def new_game(self):
+        """Prepares for a new game"""
+        self.deck_pile.shuffle()
+
+    def deal_to_players(self):
+        """Fills the hands of players"""
+        for player in self.player_list:
+            for draw in STARTING_HAND_SIZE:
+                card = self.deck_pile.draw()
+                player.add_card(card)
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -55,3 +89,7 @@ class Director:
             self (Director): An instance of Director.
         """
         pass
+
+    def roll_dice(self):
+        for die in self.dice_list:
+            die.roll()

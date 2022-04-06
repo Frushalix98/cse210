@@ -1,13 +1,14 @@
 from game.constants import *
+from game.casting.deck import Deck
 
 class Player():
     """A person who plays in the game. 
-    
+    s
     Attributes:
         is_playing (boolean): Whether or not the game is being played.
     """
 
-    def __init__(self, hand = []):
+    def __init__(self, hand = Deck()):
         """Constructs a new instance of Player
         
         Args:
@@ -17,3 +18,7 @@ class Player():
 
     def get_hand(self):
         return self._hand
+    
+    def add_card(self, card):
+        self._hand.add(card)
+
