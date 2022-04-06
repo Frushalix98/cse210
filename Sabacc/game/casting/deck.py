@@ -1,5 +1,5 @@
 import random
-from game.casting.card import Card
+from casting.card import Card
 
 class Deck():
     """A set of paper cards with a numerical value
@@ -30,4 +30,4 @@ class Deck():
         return self._deck[0]
 
     def shuffle(self):
-        self._deck = random.shuffle(self._deck)
+        random.shuffle(self._deck)

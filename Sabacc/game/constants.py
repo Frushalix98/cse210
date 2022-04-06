@@ -21,7 +21,7 @@ SPIKE = 4
 # -------------------------------------------------------------------------------------------------- 
 
 # DICE CONSTANTS
-NUM_OF_DIE = 2
+NUM_OF_DICE = 2
 DIE_SIDES = 6
 
 # PLAYER CONSTANTS

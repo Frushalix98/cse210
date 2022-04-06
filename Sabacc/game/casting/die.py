@@ -20,9 +20,10 @@ class Die:
         self._value = 0
         self._faces = abs(sides)
         self._roll_results = []
+        self.roll()
 
     def __str__(self):
-        return "1d" + str(self.faces) +" - " + str(self.value)
+        return "1d" + str(self._faces) +" - " + str(self._value)
     
     def __repr__(self):
         return self.__str__()
@@ -33,7 +34,7 @@ class Die:
         Args:
             self (Die): An instance of Die.
         """
-        self._value = random.randint(1, self.faces)
+        self._value = random.randint(1, self._faces)
         self._roll_results.append(self._value)
     
     def get_roll(self):

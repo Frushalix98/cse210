@@ -1,5 +1,5 @@
-from game.constants import *
-from game.casting.deck import Deck
+from constants import *
+from casting.deck import Deck
 
 class Player():
     """A person who plays in the game. 

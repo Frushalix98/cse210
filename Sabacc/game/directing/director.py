@@ -1,8 +1,8 @@
-from game.casting.player import Player
-from game.casting.card import Card
-from game.casting.die import Die
-from game.casting.deck import Deck
-import constants
+from casting.player import Player
+from casting.card import Card
+from casting.die import Die
+from casting.deck import Deck
+from constants import *
 
 class Director:
     """A person who directs the game. 
@@ -26,33 +26,20 @@ class Director:
         # ----------
 
         # Dice
-        self.dice_list = []
-        for number in NUM_OF_DIE:
-            dice = Die()
-            self.dice_list.append(dice)
+        self.dice = [Die(DIE_SIDES) for die in range(NUM_OF_DICE)]
 
         # Card Decks
         self.deck_pile = Deck()
-        for value in DECK_SIZE_POSITIVE:
+        self.discard_pile = Deck()
+        for value in range(DECK_SIZE_POSITIVE):
             card = Card(value)
             self.deck_pile.add(card)
 
         # Players
         self.player_list = []
-        for player in NUM_OF_PLAYERS:
+        for player in range(NUM_OF_PLAYERS):
             player = Player()
             self.player_list.append(player)
-
-    def new_game(self):
-        """Prepares for a new game"""
-        self.deck_pile.shuffle()
-
-    def deal_to_players(self):
-        """Fills the hands of players"""
-        for player in self.player_list:
-            for draw in STARTING_HAND_SIZE:
-                card = self.deck_pile.draw()
-                player.add_card(card)
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -60,11 +47,16 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self.new_game()
         while self.is_playing:
             self.do_updates()
             self.do_outputs()
             self.get_inputs()
         exit()
+    
+    def new_game(self):
+        """Prepares for a new game"""
+        self.deck_pile.shuffle()
 
     def do_outputs(self):
         """Displays the dice and the score. Also asks the player if they want to roll again. 
@@ -72,6 +64,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        self.print_dice()
         pass
 
     def get_inputs(self):
@@ -90,6 +83,18 @@ class Director:
         """
         pass
 
+    def deal_to_players(self):
+        """Fills the hands of players"""
+        for player in self.player_list:
+            for draw in STARTING_HAND_SIZE:
+                card = self.deck_pile.draw()
+                player.add_card(card)
+
     def roll_dice(self):
-        for die in self.dice_list:
+        """Rolls each die for a new value"""
+        for die in self.dice:
             die.roll()
+    
+    def print_dice(self):
+        """Prints Dice and values to console"""
+        print(self.dice)

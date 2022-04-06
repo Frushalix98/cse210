@@ -1,4 +1,4 @@
-from game.directing.director import Director
+from directing.director import Director
 
 def main():
     director = Director()
