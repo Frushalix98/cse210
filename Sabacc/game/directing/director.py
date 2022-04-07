@@ -67,8 +67,9 @@ class Director:
     
     def new_game(self):
         """Prepares for a new game"""
-        #self.deck_pile.shuffle()
-        self.print_deck_pile()
+        self.deck_pile.shuffle()
+        self.deal_cards_to_all_players()
+        self.give_chips_to_all_players(STARTING_CHIP_AMOUNT)
         pass
 
     def do_outputs(self):
@@ -95,12 +96,17 @@ class Director:
         """
         pass
 
-    def deal_to_players(self):
+    def deal_cards_to_all_players(self):
         """Fills the hands of players"""
         for player in self.player_list:
             for draw in STARTING_HAND_SIZE:
                 card = self.deck_pile.draw()
                 player.add_card(card)
+
+    def give_chips_to_all_players(self, amount):
+        """Fills the hands of players"""
+        for player in self.player_list:
+            player.add_chips(amount)
 
     def roll_dice(self):
         """Rolls each die for a new value"""
@@ -115,3 +121,14 @@ class Director:
         """Prints deck_pile with cards and their values to console"""
         print(self.deck_pile)
         print(len(self.deck_pile.get_deck()))
+
+    def print_players(self):
+        """Prints an instance of Player() to console"""
+        for player in self.player_list:
+            print(player)
+
+    def draw_from_pile(self, player = Player(), deck = Deck(), chips = int()):
+        """Given player recieves card from given deck at given price"""
+        player.add_card(deck.draw())
+        player.pay_chips(chips)
+    

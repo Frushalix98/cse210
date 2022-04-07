@@ -23,12 +23,17 @@ class Player():
     def add_card(self, card):
         self._hand.add(card)
     
+    def give_card(self):
+        card = self._hand[0]
+        self._hand.pop(0)
+        return card
+    
     def get_chips(self):
         return self._chips
 
     def add_chips(self, amount = int()):
         self._chips += amount
 
-    def subtract_chips(self, amount = int()):
+    def pay_chips(self, amount = int()):
         self._chips -= amount
 
