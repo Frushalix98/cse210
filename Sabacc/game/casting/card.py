@@ -11,10 +11,13 @@ class Card():
             Args:
                 self (Card): An instance of Card.
             """
-            self.value = value
+            self._value = value
 
     def get_value(self):
-        return self.value
+        return self._value
 
     def __str__(self):
-        return str(self.value) 
+        return str(self._value) 
+    
+    def __repr__(self):
+        return self.__str__()

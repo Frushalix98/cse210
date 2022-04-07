@@ -31,9 +31,20 @@ class Director:
         # Card Decks
         self.deck_pile = Deck()
         self.discard_pile = Deck()
-        for value in range(DECK_SIZE_POSITIVE):
+        for value in range(1, DECK_SIZE_POSITIVE+1):
             card = Card(value)
             self.deck_pile.add(card)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+
+        for value in range(1, DECK_SIZE_NEGATIVE+1):
+            card = Card(value*-1)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+
+        for cards in range(CARDS_ZEROES):
+            self.deck_pile.add(Card())
 
         # Players
         self.player_list = []
@@ -56,7 +67,9 @@ class Director:
     
     def new_game(self):
         """Prepares for a new game"""
-        self.deck_pile.shuffle()
+        #self.deck_pile.shuffle()
+        self.print_deck_pile()
+        pass
 
     def do_outputs(self):
         """Displays the dice and the score. Also asks the player if they want to roll again. 
@@ -64,7 +77,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self.print_dice()
         pass
 
     def get_inputs(self):
@@ -98,3 +110,8 @@ class Director:
     def print_dice(self):
         """Prints Dice and values to console"""
         print(self.dice)
+    
+    def print_deck_pile(self):
+        """Prints deck_pile with cards and their values to console"""
+        print(self.deck_pile)
+        print(len(self.deck_pile.get_deck()))

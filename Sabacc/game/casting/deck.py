@@ -14,6 +14,12 @@ class Deck():
             """
             self._deck = cards_list
 
+    def __str__(self):
+        return str(self._deck)
+    
+    def __repr__(self):
+        return self.__str__()
+
     def add(self, item = Card(), index = 0):
         self._deck.insert(index, item)
 
