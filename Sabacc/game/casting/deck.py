@@ -12,7 +12,9 @@ class Deck():
                 self (Deck): An instance of Deck.
                 cards (Card): An instance of Card
             """
-            self._deck = cards_list
+            self._deck = []
+            if len(cards_list) > 0:
+                self._deck = cards_list
 
     def __str__(self):
         return str(self._deck)
@@ -20,17 +22,18 @@ class Deck():
     def __repr__(self):
         return self.__str__()
 
-    def add(self, item = Card(), index = 0):
+    def add(self, item, index = 0):
         self._deck.insert(index, item)
 
     def draw(self):
-        """Removes card from the top of deck and returns that card"""
-        card = self._deck[0]
-        self._deck.pop(0)
-        return card
+        """Returns top card in list"""
+        return self._deck[0]
     
     def get_deck(self):
         return self._deck
+    
+    def set_deck(self, cards_list = list()):
+        self._deck = cards_list
 
     def get_top_card(self):
         return self._deck[0]

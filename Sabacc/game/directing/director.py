@@ -29,27 +29,15 @@ class Director:
         self.dice = [Die(DIE_SIDES) for die in range(NUM_OF_DICE)]
 
         # Card Decks
-        self.deck_pile = Deck()
         self.discard_pile = Deck()
-        for value in range(1, DECK_SIZE_POSITIVE+1):
-            card = Card(value)
-            self.deck_pile.add(card)
-            self.deck_pile.add(card)
-            self.deck_pile.add(card)
-
-        for value in range(1, DECK_SIZE_NEGATIVE+1):
-            card = Card(value*-1)
-            self.deck_pile.add(card)
-            self.deck_pile.add(card)
-            self.deck_pile.add(card)
-
-        for cards in range(CARDS_ZEROES):
-            self.deck_pile.add(Card())
-
+        self.discard_pile.set_deck([])
+        self.deck_pile = Deck()
+        self.deck_pile.set_deck([])
+        
         # Players
         self.player_list = []
-        for player in range(NUM_OF_PLAYERS):
-            player = Player()
+        for number in range(NUM_OF_PLAYERS):
+            player = Player("Player " + str(number+1), Deck([]))
             self.player_list.append(player)
 
     def start_game(self):
@@ -67,9 +55,11 @@ class Director:
     
     def new_game(self):
         """Prepares for a new game"""
+        self.create_deck_pile()
         self.deck_pile.shuffle()
         self.deal_cards_to_all_players()
         self.give_chips_to_all_players(STARTING_CHIP_AMOUNT)
+        self.print_players()
         pass
 
     def do_outputs(self):
@@ -95,13 +85,31 @@ class Director:
             self (Director): An instance of Director.
         """
         pass
+    
+    def create_deck_pile(self):
+        for value in range(1, DECK_SIZE_POSITIVE+1):
+            card = Card(value)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+        
+        for value in range(1, DECK_SIZE_NEGATIVE+1):
+            card = Card(value*-1)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+            self.deck_pile.add(card)
+
+        for cards in range(CARDS_ZEROES):
+            self.deck_pile.add(Card())
 
     def deal_cards_to_all_players(self):
         """Fills the hands of players"""
         for player in self.player_list:
-            for draw in STARTING_HAND_SIZE:
-                card = self.deck_pile.draw()
+            for draw in range(STARTING_HAND_SIZE):
+                deck = self.deck_pile
+                card = deck.get_deck()
                 player.add_card(card)
+                self.deck_pile = deck.get_deck().pop(0)
 
     def give_chips_to_all_players(self, amount):
         """Fills the hands of players"""
